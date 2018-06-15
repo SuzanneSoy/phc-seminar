@@ -1,0 +1,33 @@
+Example of a simple compiler pass for each problem, which makes that problem obvious
+
+Big passes:
+* null as default and absent
+* inter-dependency between pieces of code which generate certain information
+
+Graph manipulation:
+* fail to update a reference to an updated element
+* or issues with identity (e.g. Mono.Cecil bug)
+* lookup of a key which does not exist anymore, because the node was deleted in the meantime.
+
+Unit tests:
+* Write a test for an instruction transformation (unary negation to binary subtraction), show that it requires a class, method, main method etc.
+
+Graph construction:
+* languages with mutation: 
+* purely functional language: promises have to be forced, or explicit lookups
+* argue that purely functional languages make GC easy to design, parallelize more easily, type system easier to design and more flexible (monomorphism restriction), but lazy languages are harder to debug.
+
+Generic graph algorithms
+* depth-first search, aggregates information from nodes of two different types: show how you have to re-write it if your data structure changes a bit
+* or SCC (has_cycles), where some links matter but some don't
+
+Structural constraints
+* compute the in-memory size of a C structure: should not have any cycles
+* off-by-one when updating the number of references to an element
+* PHOAS
+
+
+
+Downsides
+* $\alpha$-renaming: problematic, since there is no declaration / use of fields anymore.
+=> IDE solution: keep track of which pass introduces which field.
