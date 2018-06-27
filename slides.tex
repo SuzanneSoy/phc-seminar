@@ -3,11 +3,15 @@ Example of a simple compiler pass for each problem, which makes that problem obv
 Big passes:
 * null as default and absent
 * inter-dependency between pieces of code which generate certain information
+  * list of methods for a class vs. list of classes on which a method is present
 
 Graph manipulation:
 * fail to update a reference to an updated element
+  * specialize a method on its receiver type: object or primitive. Update method calls, dispatch for boxed primitives, but forget to update method pointer creation
+  * update methods: indicate whether their receiver can be a primitive type. Update calls to point to the new version, but forget to update the list of methods on the class. Or more devious: update the list of methods, but forget to make the method's ``declaringClass'' field point to the updated class.
 * or issues with identity (e.g. Mono.Cecil bug)
 * lookup of a key which does not exist anymore, because the node was deleted in the meantime.
+  * remove methods which are dead code, but fail to delete some reference to that name in a list of method names.
 
 Unit tests:
 * Write a test for an instruction transformation (unary negation to binary subtraction), show that it requires a class, method, main method etc.
